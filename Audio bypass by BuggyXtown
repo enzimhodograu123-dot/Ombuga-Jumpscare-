@@ -1,0 +1,233 @@
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+local PlayerGui = player:WaitForChild("PlayerGui")
+
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "TopTextGui"
+screenGui.Parent = PlayerGui
+
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(1, 0, 0, 150)
+frame.Position = UDim2.new(0, 0, 0, 0)
+frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+frame.BackgroundTransparency = 0.5
+frame.Parent = screenGui
+
+local textLabel = Instance.new("TextLabel")
+textLabel.Size = UDim2.new(1, -20, 1, -20)
+textLabel.Position = UDim2.new(0, 10, 0, 10)
+textLabel.BackgroundTransparency = 1
+textLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+textLabel.Font = Enum.Font.SourceSansBold
+textLabel.TextSize = 40
+textLabel.TextXAlignment = Enum.TextXAlignment.Center
+textLabel.TextYAlignment = Enum.TextYAlignment.Center
+textLabel.Text = ""
+textLabel.Parent = frame
+
+local sound = Instance.new("Sound")
+sound.SoundId = "rbxassetid://3165700530"
+sound.Volume = 9
+sound.Looped = true
+sound.Parent = workspace
+sound:Play()
+
+local function typeText(text, delay)
+    textLabel.Text = ""
+    text = string.upper(text)
+    for i = 1, #text do
+        textLabel.Text = string.sub(text, 1, i)
+        wait(delay)
+    end
+end
+
+local texts = {
+    "Roblox has entered an emergency lockdown following the sudden return of Barack Obama",
+    "RUN AWAY AND HIDE"
+}
+
+for _, txt in ipairs(texts) do
+    typeText(txt, 0.05)
+    wait(1)
+end
+
+sound:Stop()
+frame:Destroy()
+if not game:IsLoaded() then
+	game.Loaded:Wait()
+end
+
+local SoundService = game:GetService("SoundService")
+local workspace = game:GetService("Workspace")
+
+local soundIds = {
+	"rbxassetid://138715168399581",
+	"rbxassetid://79192879440657",
+	"rbxassetid://95066652766828",
+	"rbxassetid://110463183442344",
+	"rbxassetid://119756618415650",
+	"rbxassetid://78924791151123",
+	"rbxassetid://100347942273491",
+	"rbxassetid://128660162099816",
+	"rbxassetid://104599831680146",
+	"rbxassetid://105943393687983",
+	"rbxassetid://99180463608515",
+	"rbxassetid://77124086404606",
+	"rbxassetid://127952914405573",
+	"rbxassetid://127009430101088"
+}
+
+local Rounds = {}
+
+for i, id in ipairs(soundIds) do
+	local sound = Instance.new("Sound")
+	sound.Name = "Round " .. i
+	sound.SoundId = id
+	sound.Volume = 4
+	sound.PlaybackSpeed = 1
+	sound.Parent = SoundService
+	for _ = 1, 3 do
+		Instance.new("DistortionSoundEffect", sound)
+	end
+	if not sound.IsLoaded then
+		sound.Loaded:Wait()
+	end
+	Rounds[i] = sound
+end
+
+local loopSound = Instance.new("Sound")
+loopSound.SoundId = "rbxassetid://7337298420"
+loopSound.Volume = 0.50
+loopSound.Looped = true
+loopSound.Parent = workspace
+loopSound.PlaybackSpeed = 1.06
+
+local jumpscareSound = Instance.new("Sound", workspace)
+jumpscareSound.Name = "JumpscareSound"
+jumpscareSound.SoundId = "rbxassetid://9067444671"
+jumpscareSound.Volume = 1
+jumpscareSound:Play()
+
+local player = game.Players.LocalPlayer
+local ScriptGui = Instance.new("ScreenGui")
+ScriptGui.Name = "Script"
+ScriptGui.Parent = player:WaitForChild("PlayerGui")
+ScriptGui.DisplayOrder = 3
+ScriptGui.ResetOnSpawn = false
+
+local obama = Instance.new("ImageLabel")
+obama.Name = "obama"
+obama.Parent = ScriptGui
+obama.BackgroundColor3 = Color3.fromRGB(0,0,0)
+obama.BorderColor3 = Color3.fromRGB(27,42,53)
+obama.Size = UDim2.new(1,2,1,80)
+obama.Position = UDim2.new(0, 0, 0, -80)
+obama.Visible = false
+obama.ZIndex = 0
+obama.Image = "rbxassetid://5643866"
+
+local obunga = Instance.new("ImageLabel")
+obunga.Name = "obunga"
+obunga.Parent = ScriptGui
+obunga.BackgroundColor3 = Color3.fromRGB(0,0,0)
+obunga.BackgroundTransparency = 1
+obunga.BorderColor3 = Color3.fromRGB(27,42,53)
+obunga.Size = UDim2.new(1,2,1,80)
+obunga.Position = UDim2.new(0, 0, 0, -80)
+obunga.Image = "rbxassetid://15603607126"
+obunga.ImageTransparency = 1
+
+local help = Instance.new("ImageLabel")
+help.Name = "help"
+help.Parent = ScriptGui
+help.BackgroundTransparency = 1
+help.Size = UDim2.new(1,2,1,80)
+help.Position = UDim2.new(0, 0, 0, -80)
+help.ZIndex = 0
+help.Image = "rbxassetid://2050833946"
+help.ImageTransparency = 1
+
+local nope = Instance.new("Sound")
+nope.Name = "nope"
+nope.Parent = ScriptGui
+nope.SoundId = "rbxassetid://9067444671"
+nope.Volume = 1
+
+local nope2 = Instance.new("Sound")
+nope2.Name = "nope2"
+nope2.Parent = ScriptGui
+nope2.SoundId = "rbxassetid://9067444671"
+nope2.Volume = 1
+
+local static = Instance.new("Sound")
+static.Name = "static"
+static.Parent = ScriptGui
+static.SoundId = "rbxassetid://5547866547"
+static.Looped = false
+static.Volume = 7
+
+local function jumpscare()
+	game:GetService("ReplicatedFirst"):RemoveDefaultLoadingScreen()
+	obama.Visible = true
+	player.PlayerGui:SetTopbarTransparency(0)
+	nope:Play()
+	task.wait(3.8)
+	for i=1,10 do
+		obama.ImageTransparency = obama.ImageTransparency + 0.1
+		task.wait()
+	end
+	obama.ZIndex = 0
+	task.wait(7.5)
+	for i=1,10 do
+		obunga.ImageTransparency = obunga.ImageTransparency - 0.1
+		task.wait(0.1)
+	end
+	task.wait(0)
+	help.ImageTransparency = 0
+	nope2:Play()
+	spawn(function()
+		local piscadas = 1
+		while true do
+			for i=1,piscadas do
+				task.wait(7)
+				static:Play()
+				help.ZIndex = 2
+				task.wait(0.3)
+				help.ZIndex = 0
+				static:Stop()
+			end
+			if piscadas == 1 then
+				piscadas = 2
+			else
+				piscadas = 1
+			end
+		end
+	end)
+	player.PlayerGui:SetTopbarTransparency(0.5)
+	Instance.new("Hint", workspace.Terrain).Text = "Obunga is still here. You are not safe."
+end
+
+coroutine.wrap(jumpscare)()
+
+spawn(function()
+	Rounds[1]:Play()
+	task.wait(3.2)
+	Rounds[1].Ended:Wait()
+	Rounds[2]:Play()
+	task.wait(7)
+	Rounds[4]:Play()
+	Rounds[2].Ended:Wait()
+	Rounds[3]:Play()
+	Rounds[4].Ended:Wait()
+	Rounds[5]:Play()
+	Rounds[5].Ended:Wait()
+	loopSound:Play()
+	for i = 6, 13 do
+		Rounds[i]:Play()
+		Rounds[i].Ended:Wait()
+	end
+	Rounds[14]:Play()
+	task.wait(6)
+end)
+print("OMBUGA JUMPSCARE BYPASS SOUNDS MADE BY BUGGYXTOWN, CREDITIS FOR OUTMOON?? IDK BUT CREDITS FOR A CREATOR OF THE THIS SCRIPT")
+
