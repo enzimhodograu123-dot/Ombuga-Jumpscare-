@@ -174,7 +174,7 @@ local function jumpscare()
 	task.wait(3.8)
 	for i=1,10 do
 		obama.ImageTransparency = obama.ImageTransparency + 0.1
-		task.wait()
+		task.wait(0.050)
 	end
 	obama.ZIndex = 0
 	task.wait(7.5)
@@ -229,5 +229,5 @@ spawn(function()
 	Rounds[14]:Play()
 	task.wait(6)
 end)
-print("OMBUGA JUMPSCARE BYPASS SOUNDS MADE BY BUGGYXTOWN, CREDITIS FOR OUTMOON?? IDK BUT CREDITS FOR A CREATOR OF THE THIS SCRIPT")
+print("OMBUGA JUMPSCARE BYPASS SOUNDS MADE BY BUGGYXTOWN, CREDITIS FOR joyboy11")
 
